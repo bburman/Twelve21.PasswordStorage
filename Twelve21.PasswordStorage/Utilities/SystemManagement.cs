@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Management;
+﻿using System;
 
 namespace Twelve21.PasswordStorage.Utilities
 {
@@ -7,11 +6,7 @@ namespace Twelve21.PasswordStorage.Utilities
     {
         public static int GetTotalCpuCores()
         {
-            return new ManagementObjectSearcher("SELECT * FROM Win32_Processor")
-                .Get()
-                .Cast<ManagementBaseObject>()
-                .Select(mbo => int.Parse(mbo["NumberOfCores"].ToString()))
-                .Sum();
+            return Environment.ProcessorCount;
         }
     }
 }
