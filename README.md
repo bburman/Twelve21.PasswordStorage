@@ -14,17 +14,23 @@ First, clone the git repository.
 git clone https://https://github.com/bburman/Twelve21.PasswordStorage.git
 ```
 
-Secondly, enter the directory and build the solution.
+Secondly, enter the directory and build the solution, or the Docker image.
 
 ```
+# Either locally
 dotnet build
+# Or using Docker
+docker build . -t password-storage
 ```
 
-Next, enter the Twelve21.PasswordStorage subdirectory and run the Argon2 Calibration function.
+Next, run the Argon2 Calibration function.
 
 ```
+# Either locally
 cd ./Twelve21.PasswordStorage
 dotnet run a2c
+# Or using Docker
+docker run -it password-storage a2c
 ```
 
 The application will run and show you the best results, similar to:
@@ -45,7 +51,10 @@ M =    1 MB, T =  639, d = 8, Time = 0.991 s
 For detailed help and options, add the --help option to the command line:
 
 ```
+# Either a local binary
 > dotnet run a2c -- --help
+# Or using Docker
+> docker run -it password-storage --help
 
 
 Usage:  a2c [options]
