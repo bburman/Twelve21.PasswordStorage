@@ -7,10 +7,15 @@ namespace Twelve21.PasswordStorage.Utilities
     {
         public static int GetTotalCpuCores()
         {
-            return new ManagementObjectSearcher("SELECT * FROM Win32_Processor")
+            var cores = new ManagementObjectSearcher("SELECT * FROM Win32_Processor")
                 .Get()
                 .Cast<ManagementBaseObject>()
-                .Select(mbo => int.Parse(mbo["NumberOfCores"].ToString()))
+                .Select(mbo => mbo["NumberOfCores"])
+                .ToList();
+
+            return cores
+                .Select(c => c.ToString())
+                .Select(c => int.Parse(c))
                 .Sum();
         }
     }
