@@ -31,7 +31,7 @@ namespace Twelve21.PasswordStorage
                     );
                 var iterationsOption = command.Option(
                     "-i|--iterations",
-                    "The minimum number of iterations. Defaults to 2.",
+                    "The minimum number of iterations. Defaults to 10. Source see crypto analysis on https://en.wikipedia.org/wiki/Argon2",
                     CommandOptionType.SingleValue
                     );
                 var modeOption = command.Option(
@@ -61,7 +61,7 @@ namespace Twelve21.PasswordStorage
                     {
                         MaximumTime = ReadOption(timeOption, () => 1000),
                         DegreeOfParallelism = ReadOption(parallelismOption, () => SystemManagement.GetTotalCpuCores() * 2),
-                        MinimumIterations = ReadOption(iterationsOption, () => 2),
+                        MinimumIterations = ReadOption(iterationsOption, () => 10),
                         Mode = ReadOption(modeOption, () => Argon2Mode.Argon2id),
                         SaltAndPasswordLength = ReadOption(saltLengthOption, () => 16),
                         HashLength = ReadOption(hashLengthOption, () => 16)
